@@ -99,8 +99,9 @@ class GitAuthHelper {
     const gitConfigPath = path.join(
       process.env['HOME'] || os.homedir(),
       '.gitconfig'
-    )
+    ) */
     const newGitConfigPath = path.join(this.temporaryHomePath, '.gitconfig')
+    /*
     let configExists = false
     try {
       await fs.promises.stat(gitConfigPath)
@@ -123,7 +124,7 @@ class GitAuthHelper {
     )
     this.git.setEnvironmentVariable('HOME', this.temporaryHomePath)
 */
-    return "hello"
+    return newGitConfigPath
   }
 
   async configureGlobalAuth(): Promise<void> {
