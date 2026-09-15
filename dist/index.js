@@ -31899,7 +31899,7 @@ const external_os_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta
  * Sanitizes an input into a string so it can be passed into issueCommand safely
  * @param input input to sanitize into a string
  */
-function utils_toCommandValue(input) {
+function toCommandValue(input) {
     if (input === null || input === undefined) {
         return '';
     }
@@ -32006,13 +32006,13 @@ class Command {
     }
 }
 function escapeData(s) {
-    return utils_toCommandValue(s)
+    return toCommandValue(s)
         .replace(/%/g, '%25')
         .replace(/\r/g, '%0D')
         .replace(/\n/g, '%0A');
 }
 function escapeProperty(s) {
-    return utils_toCommandValue(s)
+    return toCommandValue(s)
         .replace(/%/g, '%25')
         .replace(/\r/g, '%0D')
         .replace(/\n/g, '%0A')
@@ -32040,13 +32040,13 @@ function file_command_issueFileCommand(command, message) {
     if (!external_fs_namespaceObject.existsSync(filePath)) {
         throw new Error(`Missing file at path: ${filePath}`);
     }
-    external_fs_namespaceObject.appendFileSync(filePath, `${utils_toCommandValue(message)}${external_os_namespaceObject.EOL}`, {
+    external_fs_namespaceObject.appendFileSync(filePath, `${toCommandValue(message)}${external_os_namespaceObject.EOL}`, {
         encoding: 'utf8'
     });
 }
-function file_command_prepareKeyValueMessage(key, value) {
+function prepareKeyValueMessage(key, value) {
     const delimiter = `ghadelimiter_${external_crypto_namespaceObject.randomUUID()}`;
-    const convertedValue = utils_toCommandValue(value);
+    const convertedValue = toCommandValue(value);
     // These should realistically never happen, but just in case someone finds a
     // way to exploit uuid generation let's not allow keys or values that contain
     // the delimiter.
@@ -34561,9 +34561,9 @@ function exportVariable(name, val) {
     process.env[name] = convertedVal;
     const filePath = process.env['GITHUB_ENV'] || '';
     if (filePath) {
-        return issueFileCommand('ENV', prepareKeyValueMessage(name, val));
+        return file_command_issueFileCommand('ENV', prepareKeyValueMessage(name, val));
     }
-    issueCommand('set-env', { name }, convertedVal);
+    command_issueCommand('set-env', { name }, convertedVal);
 }
 /**
  * Registers a secret which will get masked from logs
@@ -34678,10 +34678,10 @@ function getBooleanInput(name, options) {
 function setOutput(name, value) {
     const filePath = process.env['GITHUB_OUTPUT'] || '';
     if (filePath) {
-        return file_command_issueFileCommand('OUTPUT', file_command_prepareKeyValueMessage(name, value));
+        return file_command_issueFileCommand('OUTPUT', prepareKeyValueMessage(name, value));
     }
     process.stdout.write(external_os_namespaceObject.EOL);
-    command_issueCommand('set-output', { name }, utils_toCommandValue(value));
+    command_issueCommand('set-output', { name }, toCommandValue(value));
 }
 /**
  * Enables or disables the echoing of commands into stdout for the rest of the step.
@@ -34800,9 +34800,9 @@ function group(name, fn) {
 function saveState(name, value) {
     const filePath = process.env['GITHUB_STATE'] || '';
     if (filePath) {
-        return file_command_issueFileCommand('STATE', file_command_prepareKeyValueMessage(name, value));
+        return file_command_issueFileCommand('STATE', prepareKeyValueMessage(name, value));
     }
-    command_issueCommand('save-state', { name }, utils_toCommandValue(value));
+    command_issueCommand('save-state', { name }, toCommandValue(value));
 }
 /**
  * Gets the value of an state set by this action's main execution.
@@ -35109,6 +35109,7 @@ class GitAuthHelper {
         // Override HOME
         info(`Temporarily overriding HOME='${this.temporaryHomePath}' before making global git config changes`);
         this.git.setEnvironmentVariable('HOME', this.temporaryHomePath);
+        exportVariable('GIT_CONFIG_GLOBAL', `${newGitConfigPath}`);
         return newGitConfigPath;
     }
     async configureGlobalAuth() {
