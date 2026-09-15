@@ -124,6 +124,7 @@ class GitAuthHelper {
     )
     this.git.setEnvironmentVariable('HOME', this.temporaryHomePath)
 
+    core.exportVariable('HOME', `${this.temporaryHomePath}`);
     core.exportVariable('GIT_CONFIG_GLOBAL', `${newGitConfigPath}`);
     
     return newGitConfigPath
