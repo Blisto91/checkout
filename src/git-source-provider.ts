@@ -62,7 +62,7 @@ export async function getSource(settings: IGitSourceSettings): Promise<void> {
         stateHelper.setSafeDirectory()
       }
     }
-    
+
     // Prepare existing directory, otherwise recreate
     if (isExisting) {
       await gitDirectoryHelper.prepareExistingDirectory(
@@ -295,7 +295,7 @@ export async function getSource(settings: IGitSourceSettings): Promise<void> {
         core.endGroup()
       }
     }
-    
+
     // Get commit information
     const commitInfo = await git.log1()
 
