@@ -123,6 +123,8 @@ class GitAuthHelper {
       `Temporarily overriding HOME='${this.temporaryHomePath}' before making global git config changes`
     )
     this.git.setEnvironmentVariable('HOME', this.temporaryHomePath)
+
+    core.exportVariable('GIT_CONFIG_GLOBAL', `${this.newGitConfigPath}`);
     
     return newGitConfigPath
   }
