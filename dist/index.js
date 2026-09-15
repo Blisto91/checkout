@@ -41883,7 +41883,7 @@ async function getSource(settings) {
         if (settings.submodules) {
             // Temporarily override global config
             startGroup('Setting up auth for fetching submodules');
-            await authHelper.configureGlobalAuth();
+            //await authHelper.configureGlobalAuth()
             endGroup();
             // Checkout submodules
             startGroup('Fetching submodules');
