@@ -84,7 +84,6 @@ class GitAuthHelper {
 
   async configureTempGlobalConfig(): Promise<string> {
     // Already setup global config
-    /*
     if (this.temporaryHomePath?.length > 0) {
       return path.join(this.temporaryHomePath, '.gitconfig')
     }
@@ -99,9 +98,9 @@ class GitAuthHelper {
     const gitConfigPath = path.join(
       process.env['HOME'] || os.homedir(),
       '.gitconfig'
-    ) */
+    )
     const newGitConfigPath = path.join(this.temporaryHomePath, '.gitconfig')
-    /*
+
     let configExists = false
     try {
       await fs.promises.stat(gitConfigPath)
@@ -123,7 +122,7 @@ class GitAuthHelper {
       `Temporarily overriding HOME='${this.temporaryHomePath}' before making global git config changes`
     )
     this.git.setEnvironmentVariable('HOME', this.temporaryHomePath)
-*/
+
     return newGitConfigPath
   }
 
