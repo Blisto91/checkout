@@ -35077,46 +35077,42 @@ class GitAuthHelper {
     }
     async configureTempGlobalConfig() {
         // Already setup global config
-        /*
         if (this.temporaryHomePath?.length > 0) {
-          return path.join(this.temporaryHomePath, '.gitconfig')
+            return external_path_namespaceObject.join(this.temporaryHomePath, '.gitconfig');
         }
         // Create a temp home directory
-        const runnerTemp = process.env['RUNNER_TEMP'] || ''
-        assert.ok(runnerTemp, 'RUNNER_TEMP is not defined')
-        const uniqueId = randomUUID()
-        this.temporaryHomePath = path.join(runnerTemp, uniqueId)
-        await fs.promises.mkdir(this.temporaryHomePath, {recursive: true})
-    
+        const runnerTemp = process.env['RUNNER_TEMP'] || '';
+        external_assert_.ok(runnerTemp, 'RUNNER_TEMP is not defined');
+        const uniqueId = (0,external_crypto_namespaceObject.randomUUID)();
+        this.temporaryHomePath = external_path_namespaceObject.join(runnerTemp, uniqueId);
+        await external_fs_namespaceObject.promises.mkdir(this.temporaryHomePath, { recursive: true });
         // Copy the global git config
-        const gitConfigPath = path.join(
-          process.env['HOME'] || os.homedir(),
-          '.gitconfig'
-        ) */
+        const gitConfigPath = external_path_namespaceObject.join(process.env['HOME'] || external_os_namespaceObject.homedir(), '.gitconfig');
         const newGitConfigPath = external_path_namespaceObject.join(this.temporaryHomePath, '.gitconfig');
-        /*
-        let configExists = false
+        let configExists = false;
         try {
-          await fs.promises.stat(gitConfigPath)
-          configExists = true
-        } catch (err) {
-          if ((err as any)?.code !== 'ENOENT') {
-            throw err
-          }
+            await external_fs_namespaceObject.promises.stat(gitConfigPath);
+            configExists = true;
+        }
+        catch (err) {
+            if (err?.code !== 'ENOENT') {
+                throw err;
+            }
         }
         if (configExists) {
-          core.info(`Copying '${gitConfigPath}' to '${newGitConfigPath}'`)
-          await io.cp(gitConfigPath, newGitConfigPath)
-        } else {
-          await fs.promises.writeFile(newGitConfigPath, '')
+            info(`Copying '${gitConfigPath}' to '${newGitConfigPath}'`);
+            await io_cp(gitConfigPath, newGitConfigPath);
         }
-    
+        else {
+            await external_fs_namespaceObject.promises.writeFile(newGitConfigPath, '');
+        }
         // Override HOME
+        /*
         core.info(
           `Temporarily overriding HOME='${this.temporaryHomePath}' before making global git config changes`
         )
         this.git.setEnvironmentVariable('HOME', this.temporaryHomePath)
-    */
+        */
         return newGitConfigPath;
     }
     async configureGlobalAuth() {
