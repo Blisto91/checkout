@@ -84,6 +84,7 @@ class GitAuthHelper {
 
   async configureTempGlobalConfig(): Promise<string> {
     // Already setup global config
+    /*
     if (this.temporaryHomePath?.length > 0) {
       return path.join(this.temporaryHomePath, '.gitconfig')
     }
@@ -122,7 +123,7 @@ class GitAuthHelper {
     )
     this.git.setEnvironmentVariable('HOME', this.temporaryHomePath)
 
-    return newGitConfigPath
+    return newGitConfigPath */
   }
 
   async configureGlobalAuth(): Promise<void> {
