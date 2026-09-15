@@ -6,7 +6,7 @@ import * as gitDirectoryHelper from './git-directory-helper.js'
 import * as githubApiHelper from './github-api-helper.js'
 import * as io from '@actions/io'
 import * as path from 'path'
-import * as refHelper from './ref-helper.js'f
+import * as refHelper from './ref-helper.js'
 import * as stateHelper from './state-helper.js'
 import * as urlHelper from './url-helper.js'
 import {
