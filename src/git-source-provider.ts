@@ -6,7 +6,7 @@ import * as gitDirectoryHelper from './git-directory-helper.js'
 import * as githubApiHelper from './github-api-helper.js'
 import * as io from '@actions/io'
 import * as path from 'path'
-import * as refHelper from './ref-helper.js'
+import * as refHelper from './ref-helper.js'f
 import * as stateHelper from './state-helper.js'
 import * as urlHelper from './url-helper.js'
 import {
@@ -62,7 +62,7 @@ export async function getSource(settings: IGitSourceSettings): Promise<void> {
         stateHelper.setSafeDirectory()
       }
     }
-/*
+
     // Prepare existing directory, otherwise recreate
     if (isExisting) {
       await gitDirectoryHelper.prepareExistingDirectory(
@@ -312,7 +312,7 @@ export async function getSource(settings: IGitSourceSettings): Promise<void> {
       settings.ref,
       settings.commit,
       settings.githubServerUrl
-    )*/
+    )
   } finally {
     // Remove auth
     if (authHelper) {
