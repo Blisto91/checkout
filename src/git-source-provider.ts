@@ -314,8 +314,7 @@ export async function getSource(settings: IGitSourceSettings): Promise<void> {
       settings.githubServerUrl
     )*/
   } finally {
-    // Remove auth 
-    
+    // Remove auth
     if (authHelper) {
       if (!settings.persistCredentials) {
         core.startGroup('Removing auth')
