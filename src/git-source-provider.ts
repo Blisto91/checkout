@@ -62,7 +62,7 @@ export async function getSource(settings: IGitSourceSettings): Promise<void> {
         stateHelper.setSafeDirectory()
       }
     }
-/*
+    
     // Prepare existing directory, otherwise recreate
     if (isExisting) {
       await gitDirectoryHelper.prepareExistingDirectory(
@@ -312,7 +312,7 @@ export async function getSource(settings: IGitSourceSettings): Promise<void> {
       settings.ref,
       settings.commit,
       settings.githubServerUrl
-    )*/
+    )
   } finally {
     // Remove auth
     if (authHelper) {
