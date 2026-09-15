@@ -315,14 +315,14 @@ export async function getSource(settings: IGitSourceSettings): Promise<void> {
     )*/
   } finally {
     // Remove auth 
-    /*
+    
     if (authHelper) {
       if (!settings.persistCredentials) {
         core.startGroup('Removing auth')
         await authHelper.removeAuth()
         core.endGroup()
       }
-      authHelper.removeGlobalConfig() */
+      authHelper.removeGlobalConfig()
     }
   }
 }
