@@ -35107,12 +35107,8 @@ class GitAuthHelper {
             await external_fs_namespaceObject.promises.writeFile(newGitConfigPath, '');
         }
         // Override HOME
-        /*
-        core.info(
-          `Temporarily overriding HOME='${this.temporaryHomePath}' before making global git config changes`
-        )
-        this.git.setEnvironmentVariable('HOME', this.temporaryHomePath)
-        */
+        info(`Temporarily overriding HOME='${this.temporaryHomePath}' before making global git config changes`);
+        this.git.setEnvironmentVariable('HOME', this.temporaryHomePath);
         return newGitConfigPath;
     }
     async configureGlobalAuth() {
