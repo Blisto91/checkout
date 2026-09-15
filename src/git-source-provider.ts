@@ -62,7 +62,7 @@ export async function getSource(settings: IGitSourceSettings): Promise<void> {
         stateHelper.setSafeDirectory()
       }
     }
-
+/*
     // Prepare existing directory, otherwise recreate
     if (isExisting) {
       await gitDirectoryHelper.prepareExistingDirectory(
@@ -275,7 +275,7 @@ export async function getSource(settings: IGitSourceSettings): Promise<void> {
     if (settings.submodules) {
       // Temporarily override global config
       core.startGroup('Setting up auth for fetching submodules')
-      //await authHelper.configureGlobalAuth()
+      await authHelper.configureGlobalAuth()
       core.endGroup()
 
       // Checkout submodules
@@ -312,7 +312,7 @@ export async function getSource(settings: IGitSourceSettings): Promise<void> {
       settings.ref,
       settings.commit,
       settings.githubServerUrl
-    )
+    )*/
   } finally {
     // Remove auth
     if (authHelper) {
